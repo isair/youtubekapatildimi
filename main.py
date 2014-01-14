@@ -1,3 +1,9 @@
+"""
+main.py
+Jan 14, 2014
+Copyright (C) 2014 Barış Şencan
+"""
+
 import os
 import redis
 import dns.resolver
