@@ -21,7 +21,15 @@ app.jinja_env.globals['static'] = (
 redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
 redis = redis.from_url(redis_url)
 
+# DNS list (plot twist: it's actually a dictionary).
+dns_list = {
+    'Google': ('8.8.8.8', '8.8.4.4'),
+    'OpenDNS': ('208.67.222.222', '208.67.220.220'),
+    'TTNet': ('195.175.39.40', '195.175.39.39'),
+    'UyduNet': ('62.248.80.161', '62.248.80.162')
+}
+
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', dns_list=dns_list)
