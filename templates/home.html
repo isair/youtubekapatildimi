@@ -9,15 +9,15 @@
 <div class="row">
     <div class="medium-offset-2 medium-8 columns end">
 
-        <div class="panel text-center">
-            <h2>YouTube kapatıldı mı?</h2>
+        <div class="panel">
+            <h2 class="text-center">YouTube kapatıldı mı?</h2>
             <hr />
 
             <table width="100%">
                 <thead>
                     <tr>
-                        <th width="75%">DNS</th>
-                        <th width="25%">Erişilebilirlik</th>
+                        <th width="70%">DNS</th>
+                        <th width="30%">Erişilebilirlik</th>
                     </tr>
                 </thead>
 
@@ -33,7 +33,19 @@
                                     {% endfor %}
                                 </small>
                             </td>
-                            <td class="text-left">Ne bileyim?</td>
+                            <td class="text-left">
+                                {% if status_for[dns] == 'up' %}
+                                    Açık
+                                {% elif status_for[dns] == 'court_blocked' %}
+                                    Mahkeme Engelli
+                                {% elif status_for[dns] == 'down' %}
+                                    Sayfa Açılmıyor
+                                {% elif status_for[dns] == 'dns_down' %}
+                                    DNS Erişilemiyor
+                                {% else %}
+                                    Bilinmiyor
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

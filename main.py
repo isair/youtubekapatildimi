@@ -8,7 +8,6 @@ Copyright (C) 2014 Barış Şencan
 
 import os
 import redis
-import dns.resolver
 from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
@@ -32,4 +31,13 @@ dns_list = {
 
 @app.route('/')
 def home():
-    return render_template('home.html', dns_list=dns_list)
+    status_for = dict()
+
+    # Fetch information from database.
+    for server in dns_list:
+        try:
+            status_for[server] = redis.get(server)
+        except:
+            status_for[server] = 'unknown'
+
+    return render_template('home.html', dns_list=dns_list, status_for=status_for)
