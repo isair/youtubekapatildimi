@@ -22,10 +22,20 @@
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td class="text-left">8.8.8.8</td>
-                        <td class="text-left">Ne bileyim?</td>
-                    </tr>
+                    {% for dns in dns_list %}
+                        <tr>
+                            <td class="text-left">
+                                {{ dns }}
+                                <small>
+                                    {% for ip in dns_list[dns] %}
+                                        {{ ip }}
+                                        {% if not loop.last %},{% endif %}
+                                    {% endfor %}
+                                </small>
+                            </td>
+                            <td class="text-left">Ne bileyim?</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
