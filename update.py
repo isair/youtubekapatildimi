@@ -54,4 +54,8 @@ for name_server in dns_list:
             print address, 'seems to be blocked by court order when requested from', name_server
             break
 
+    try:
+        redis.set(name_server, 'up')
+    except:
+        pass
     print address, 'reachable from', name_server
