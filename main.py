@@ -9,8 +9,12 @@ Copyright (C) 2014 Barış Şencan
 import os
 import redis
 from flask import Flask, render_template, url_for
+from flask.ext.compress import Compress
 
 app = Flask(__name__)
+
+# Enable gzip compression.
+Compress(app)
 
 # Static file loading helper.
 app.jinja_env.globals['static'] = (
