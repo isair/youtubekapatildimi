@@ -45,8 +45,11 @@ for name_server in dns_list:
         print address, 'is down when accessed from', name_server
         continue
 
+    court_blocked = False
+
     for line in response:
         if 'mahkeme' in line.lower():
+            court_blocked = True
             try:
                 redis.set(name_server, 'court_blocked')
             except:
@@ -54,8 +57,9 @@ for name_server in dns_list:
             print address, 'seems to be blocked by court order when requested from', name_server
             break
 
-    try:
-        redis.set(name_server, 'up')
-    except:
-        pass
-    print address, 'reachable from', name_server
+    if not court_blocked:
+        try:
+            redis.set(name_server, 'up')
+        except:
+            pass
+        print address, 'reachable from', name_server
