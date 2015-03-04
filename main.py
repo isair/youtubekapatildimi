@@ -3,7 +3,7 @@
 """
 main.py
 Jan 14, 2014
-Copyright (C) 2014 Barış Şencan
+Copyright (C) 2014 Baris Sencan
 """
 
 import os
@@ -28,21 +28,16 @@ redis = redis.from_url(redis_url)
 dns_list = {
     'Google': ('8.8.8.8', '8.8.4.4'),
     'OpenDNS': ('208.67.222.222', '208.67.220.220'),
-    'TTNet': ('195.175.39.40', '195.175.39.39'),
-    'SuperOnline': ('213.74.0.1', '213.74.1.1'),
-    'UyduNet': ('62.248.80.161', '62.248.80.162')
+    'TTNet': ('195.175.39.40', '195.175.39.39')
 }
-
 
 @app.route('/')
 def home():
+    # Fetch information from database and render page.
     status_for = dict()
-
-    # Fetch information from database.
     for server in dns_list:
         try:
             status_for[server] = redis.get(server)
         except:
             status_for[server] = 'unknown'
-
     return render_template('home.html', dns_list=dns_list, status_for=status_for)
