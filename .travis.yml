@@ -1,0 +1,8 @@
+language: python
+python: 2.7
+deploy:
+  provider: heroku
+  api_key:
+    secure: S+SeVP6HaT8bRS5BRvzcXUWNK4mFhpMWHW0ymJajyMuOaDcEZaqTn4X0RD+MZxlkVCkp4NiDHfyl07MFyLejvVoXvgEIzhXMadmZ9Lpy/MQI6mOYMFd5TUowxQY9IF4P4PtsGEIPs8QgYvVfbwVTo29BWRwBs6xVS4v1O4GGIa0=
+  app:
+    production: youtubekapatildimi
